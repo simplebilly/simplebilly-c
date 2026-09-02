@@ -1,0 +1,78 @@
+#ifndef supplier_condition_TEST
+#define supplier_condition_TEST
+
+// the following is to include only the main from the first c file
+#ifndef TEST_MAIN
+#define TEST_MAIN
+#define supplier_condition_MAIN
+#endif // TEST_MAIN
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../external/cJSON.h"
+
+#include "../model/supplier_condition.h"
+supplier_condition_t* instantiate_supplier_condition(int include_optional);
+
+
+
+supplier_condition_t* instantiate_supplier_condition(int include_optional) {
+  supplier_condition_t* supplier_condition = NULL;
+  if (include_optional) {
+    supplier_condition = supplier_condition_create(
+      "012",
+      "0",
+      "0",
+      1,
+      "0",
+      "0",
+      56,
+      "0",
+      "0",
+      "0",
+      null
+    );
+  } else {
+    supplier_condition = supplier_condition_create(
+      "012",
+      "0",
+      "0",
+      1,
+      "0",
+      "0",
+      56,
+      "0",
+      "0",
+      "0",
+      null
+    );
+  }
+
+  return supplier_condition;
+}
+
+
+#ifdef supplier_condition_MAIN
+
+void test_supplier_condition(int include_optional) {
+    supplier_condition_t* supplier_condition_1 = instantiate_supplier_condition(include_optional);
+
+	cJSON* jsonsupplier_condition_1 = supplier_condition_convertToJSON(supplier_condition_1);
+	printf("supplier_condition :\n%s\n", cJSON_Print(jsonsupplier_condition_1));
+	supplier_condition_t* supplier_condition_2 = supplier_condition_parseFromJSON(jsonsupplier_condition_1);
+	cJSON* jsonsupplier_condition_2 = supplier_condition_convertToJSON(supplier_condition_2);
+	printf("repeating supplier_condition:\n%s\n", cJSON_Print(jsonsupplier_condition_2));
+}
+
+int main() {
+  test_supplier_condition(1);
+  test_supplier_condition(0);
+
+  printf("Hello world \n");
+  return 0;
+}
+
+#endif // supplier_condition_MAIN
+#endif // supplier_condition_TEST

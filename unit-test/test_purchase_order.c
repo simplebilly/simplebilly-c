@@ -1,0 +1,80 @@
+#ifndef purchase_order_TEST
+#define purchase_order_TEST
+
+// the following is to include only the main from the first c file
+#ifndef TEST_MAIN
+#define TEST_MAIN
+#define purchase_order_MAIN
+#endif // TEST_MAIN
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../external/cJSON.h"
+
+#include "../model/purchase_order.h"
+purchase_order_t* instantiate_purchase_order(int include_optional);
+
+
+
+purchase_order_t* instantiate_purchase_order(int include_optional) {
+  purchase_order_t* purchase_order = NULL;
+  if (include_optional) {
+    purchase_order = purchase_order_create(
+      "0",
+      null,
+      "2013-10-20",
+      null,
+      "0",
+      "2013-10-20",
+      "0",
+      draft,
+      "0",
+      "0",
+      "0",
+      "0"
+    );
+  } else {
+    purchase_order = purchase_order_create(
+      "0",
+      null,
+      "2013-10-20",
+      null,
+      "0",
+      "2013-10-20",
+      "0",
+      draft,
+      "0",
+      "0",
+      "0",
+      "0"
+    );
+  }
+
+  return purchase_order;
+}
+
+
+#ifdef purchase_order_MAIN
+
+void test_purchase_order(int include_optional) {
+    purchase_order_t* purchase_order_1 = instantiate_purchase_order(include_optional);
+
+	cJSON* jsonpurchase_order_1 = purchase_order_convertToJSON(purchase_order_1);
+	printf("purchase_order :\n%s\n", cJSON_Print(jsonpurchase_order_1));
+	purchase_order_t* purchase_order_2 = purchase_order_parseFromJSON(jsonpurchase_order_1);
+	cJSON* jsonpurchase_order_2 = purchase_order_convertToJSON(purchase_order_2);
+	printf("repeating purchase_order:\n%s\n", cJSON_Print(jsonpurchase_order_2));
+}
+
+int main() {
+  test_purchase_order(1);
+  test_purchase_order(0);
+
+  printf("Hello world \n");
+  return 0;
+}
+
+#endif // purchase_order_MAIN
+#endif // purchase_order_TEST

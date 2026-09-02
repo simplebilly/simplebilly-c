@@ -1,0 +1,14 @@
+# account_overview_t
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**account** | **char \*** |  | 
+**account_name** | **char \*** |  | 
+**balance** | **char \*** |  | 
+**credit_total** | **char \*** |  | 
+**debit_total** | **char \*** |  | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
